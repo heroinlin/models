@@ -100,7 +100,7 @@ def get_configs_from_pipeline_file():
   """
   pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
   with tf.gfile.GFile(FLAGS.pipeline_config_path, 'r') as f:
-    text_format.Merge(f.read(), pipeline_config)
+    text_format.Merge(f.read().decode('utf-8'), pipeline_config)
 
   model_config = pipeline_config.model
   train_config = pipeline_config.train_config
