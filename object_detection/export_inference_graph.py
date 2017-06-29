@@ -90,7 +90,7 @@ def main(_):
   assert FLAGS.input_type, 'Input type missing.'
   pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
   with tf.gfile.GFile(FLAGS.pipeline_config_path, 'r') as f:
-    text_format.Merge(f.read(), pipeline_config)
+    text_format.Merge(f.read().decode('utf-8'), pipeline_config)
   exporter.export_inference_graph(FLAGS.input_type, pipeline_config,
                                   FLAGS.checkpoint_path,
                                   FLAGS.inference_graph_path,
