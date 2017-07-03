@@ -58,6 +58,13 @@ python export_inference_graph \
     --pipeline_config_path path/to/ssd_inception_v2.config \
     --checkpoint_path path/to/model-ckpt \
     --inference_graph_path path/to/inference_graph.pb
+
+python export_inference_graph \
+    --input_type image_tensor \
+    --pipeline_config_path ./my_model/faster_rcnn_resnet101_voc07.config \
+    --checkpoint_path F:\models\voc\resnet101\model.ckpt-189629
+    --inference_graph_path ./my_model/inference_graph.pb
+
 """
 import tensorflow as tf
 from google.protobuf import text_format

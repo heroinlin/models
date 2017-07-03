@@ -15,7 +15,7 @@ from object_detection.utils import visualization_utils as vis_util
 
 PATH_TO_LABELS = "data/pascal_label_map.pbtxt"
 PATH_TO_CKPT = "my_model/inference_graph.pb"
-NUM_CLASSES = 1
+NUM_CLASSES = 20
 # For the sake of simplicity we will use only 2 images:
 # image1.jpg
 # image2.jpg
@@ -23,7 +23,7 @@ NUM_CLASSES = 1
 # PATH_TO_TEST_IMAGES_DIR = 'F:/log'
 # TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, image) for image in os.listdir(PATH_TO_TEST_IMAGES_DIR)]
 PATH_TO_TEST_IMAGES_DIR = 'test_images'
-TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 3)]
+TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 3)]
 
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
@@ -77,7 +77,7 @@ def object_detection():
                       line_thickness=8)
                 plt.figure(figsize=IMAGE_SIZE)
                 plt.imshow(image_np)
-                # plt.savefig("./1.jpg")
+                plt.savefig("./1.jpg")
 
 
 
