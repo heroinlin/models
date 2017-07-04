@@ -5,15 +5,11 @@ from __future__ import print_function
 
 import hashlib
 import io
-import logging
-import os
 
-from lxml import etree
 import PIL.Image
 import tensorflow as tf
 
 from object_detection.utils import dataset_util
-from object_detection.utils import label_map_util
 
 
 def read_label_file(label_file_path):
@@ -45,10 +41,11 @@ def main():
     truncated = []
     poses = []
     difficult_obj = []
-    image_list_path = r"F:\Database\data_set\train\train.txt"
-    # image_list_path = r"F:\Database\data_set\validate\val.txt"
-    writer = tf.python_io.TFRecordWriter("head_train.record")
-    # writer = tf.python_io.TFRecordWriter("head_val.record")
+    # image_idx = 0
+    image_list_path = r"F:\Database\bus_passenger_count\data_set\train\train_bk.txt"
+    # image_list_path = r"F:\Database\bus_passenger_count\data_set\validate\val.txt"
+    writer = tf.python_io.TFRecordWriter("F:\\tensorflow\\tfrecord\\head_train.record")
+    # writer = tf.python_io.TFRecordWriter("F:\\tensorflow\\tfrecord\\head_val.record")
     with open(image_list_path, "r") as file:
         image_list = [line.strip().split() for line in file.readlines()]
         for img_path in image_list:
@@ -73,9 +70,9 @@ def main():
                 xmax.append(object[obj_num][3])
                 ymax.append(object[obj_num][4])
                 classes_text.append('head'.encode('utf8'))
-                classes.append(object[obj_num][0])
+                classes.append(object[obj_num][0] + 1)  # 类别从1开始
                 difficult_obj.append(0)
-                truncated.append(0)
+                truncated.append(1)
                 poses.append('Unspecified'.encode('utf8'))
             example = tf.train.Example(features=tf.train.Features(feature={
                 'image/height': dataset_util.int64_feature(height),
@@ -97,6 +94,9 @@ def main():
                 'image/object/truncated': dataset_util.int64_list_feature(truncated),
                 'image/object/view': dataset_util.bytes_list_feature(poses),
             }))
+            # image_idx +=1
+            # if image_idx == 1:
+            #     print(example)
             writer.write(example.SerializeToString())
     writer.close()
 
