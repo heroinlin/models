@@ -44,6 +44,13 @@ Example usage:
 import functools
 import json
 import os
+"""
+  TF_CPP_MIN_LOG_LEVEL is a TensorFlow environment variable responsible for the logs,
+  to silence INFO logs set it to 1,
+  to filter out WARNING 2
+  and to additionally silence ERROR logs (not recommended) set it to 3
+"""
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 
 from google.protobuf import text_format
